@@ -4,11 +4,8 @@
 
 ## Start front end
 
-Commands
+Follow readme inside `streakapp-frontend` project folder
 
-```
-npm start
-npm run build
-npm test
-npm run eject
-```
+## Start backend
+
+Follow readme inside `streakapp-api` project folder
