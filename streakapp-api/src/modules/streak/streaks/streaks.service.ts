@@ -102,14 +102,8 @@ export class StreaksService {
     // assumption is that we get this in order form DB ascending from current to past
     // first element = today.
 
-    for (let i = 0; i < days.length; i++) {
+    for (let i = days.length - 1; i >= 0; i--) {
       const activity = days[i];
-
-      // check completed
-      if (activity.activities > 0) {
-        activity.state = StreakState.COMPLETED;
-        continue;
-      }
 
       let hasStreakYesterday = false;
       let hasStreakOtherday = false;
@@ -117,29 +111,39 @@ export class StreaksService {
       const otherday = i + 2;
 
       // we're using activities here since state is not yet set on past days
-      if (days.length > yesterday)
+      if (days.length > yesterday) {
         hasStreakYesterday = days[yesterday].activities > 0;
-      if (days.length > otherday)
+
+        // check saved
+        if (!hasStreakYesterday && activity.activities >= 2) {
+          days[yesterday].state = StreakState.SAVED;
+        }
+      }
+      if (days.length > otherday) {
         hasStreakOtherday = days[otherday].activities > 0;
 
-      // check saved
-      if (
-        (!hasStreakYesterday && days[i].activities >= 2) ||
-        (!hasStreakYesterday && !hasStreakOtherday && days[i].activities >= 3)
-      ) {
-        days[i].state = StreakState.SAVED;
-        continue;
+        // check saved
+        if (
+          !hasStreakYesterday &&
+          !hasStreakOtherday &&
+          activity.activities >= 3
+        ) {
+          days[otherday].state = StreakState.SAVED;
+        }
       }
 
       // check at risk
-      if (hasStreakYesterday && days[i].activities === 0) {
-        days[i].state = StreakState.AT_RISK;
-        continue;
+      if (hasStreakYesterday && activity.activities === 0) {
+        activity.state = StreakState.AT_RISK;
       }
 
-      if (hasStreakOtherday && days[i].activities === 0) {
-        days[i].state = StreakState.AT_RISK;
-        continue;
+      if (hasStreakOtherday && activity.activities === 0) {
+        activity.state = StreakState.AT_RISK;
+      }
+
+      // check completed
+      if (activity.activities > 0) {
+        activity.state = StreakState.COMPLETED;
       }
 
       // no need to set state to INCOMPLETE since it's default
