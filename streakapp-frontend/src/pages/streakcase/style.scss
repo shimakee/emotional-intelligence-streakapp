@@ -1,0 +1,44 @@
+
+
+.streakcase-container {
+  display: flex;
+  flex-direction: column;
+  // align-content: center;
+  // justify-content: center;
+  // padding: 20px;
+  width: 100%;
+  height: 100vh;
+
+  h3{
+    color: #4B27DC;
+    display: flex;
+    justify-content: center;
+  }
+  .streakcase-content{
+    background-color: red;
+    padding: 20px;
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .streakcase{
+      background-color: #4B27DC;
+      padding: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      p{
+        font-family: "Euclid Circular B";
+        // tried to follow figma values but it looked wrong.
+        font-weight: 450;
+        font-size: 40px;
+        line-height: 136%;
+        letter-spacing: -0.1px;
+      }
+    }
+  }
+}
+

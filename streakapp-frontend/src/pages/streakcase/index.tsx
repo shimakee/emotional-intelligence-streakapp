@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';
+import './style.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
@@ -24,7 +24,7 @@ days: Day[];
 }
   
   // Fetch function to get data from the API
-  const fetchData = async (streakcase: string | undefined): Promise<Streak[]> => {
+  const fetchData = async (streakcase: string | undefined): Promise<Streak> => {
     if(streakcase === undefined || isNaN(Number(streakcase))) {
         throw new Error('Invalid streakcase argument. Must be a number.');
     }
@@ -51,21 +51,29 @@ const StreakCase: React.FC = () => {
         return <p>Error: {error.message}</p>;
     }
 
+    if(!data){
+        return <p>No data found</p>;
+    }
+
     if(streakcase === undefined || isNaN(Number(streakcase))) {
         navigate('/home');
         return null;
     }
 
     return (
-            <div className="streakcase">
-                Streak case {+streakcase}
-
-                <p>
-                    {JSON.stringify(data)}
-                </p>
+            <div className="streakcase-container">
+                <h3>ahead</h3>
+                <div className="streakcase-content">
+                    <div className="streakcase">
+                        <p>
+                            {data ? <> Your streak is {data.total} days.</>
+                            : <>Your streak has no data.</>}
+                        </p>
+                    </div>
+                </div>
             </div>
-
         );
 };
 
 export default StreakCase;
+
