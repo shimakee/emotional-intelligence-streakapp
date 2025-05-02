@@ -3,6 +3,7 @@
 .streakcase-container {
   display: flex;
   flex-direction: column;
+  background-color: #FEF1CF;
   background: url("http://localhost:3000/frame.png") no-repeat center center fixed;
   width: 100%;
   height: 100vh;
@@ -48,13 +49,13 @@
         
         div.streakdays{
           display: flex;
-          gap: 10px;
+          gap: 15px;
           border-bottom: 1px solid #E6E6E6;
           margin-bottom: 5px;
 
           span.today{
             border-bottom: 1px solid #4B27DC;
-
+            padding-bottom: 10px;
           }
         }
       }

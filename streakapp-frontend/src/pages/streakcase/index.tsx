@@ -62,18 +62,9 @@ const StreakCase: React.FC = () => {
         return null;
     }
 
-    const renderStreakState = (state: StreakState) =>state === StreakState.INCOMPLETE ? <FaCheckCircle /> : <GoDotFill />;
+    const renderStreakState = (state: StreakState) =>state !== StreakState.INCOMPLETE ? <FaCheckCircle /> : <GoDotFill />;
     const sortedDays = (days: Day[]) => days.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    // const isToday = (day: Day) =>{ 
-        
-        
-        
-    //     new Date(day.date).getDate === new Date(Date.now()).getDate ? "today" : ""}
 
-    // // const isToday = (day: Day) => {console.log("day", day.date)
-
-    //     return <p></p>;
-    // };
     return (
             <div className="streakcase-container">
                 <h3>ahead</h3>
@@ -96,15 +87,10 @@ const StreakCase: React.FC = () => {
                                         today.getFullYear() === dayDate.getFullYear();
 
                                         const wordDay = dayDate.toLocaleString('default', { weekday: 'short' });
-
-                                        console.log("day", new Date(day.date).getDate());
-                                        
                                         return (
-                                        
-                                        <span className={isToday ? "today" : ""}>{renderStreakState(day.state)} {wordDay}</span>
+                                        <span key={day.date} className={isToday ? "today" : ""}>{renderStreakState(day.state)} {wordDay}</span>
                                     )})}
                                 </div>
-                                <hr />
                             </div>}
                     </div>
                 </div>

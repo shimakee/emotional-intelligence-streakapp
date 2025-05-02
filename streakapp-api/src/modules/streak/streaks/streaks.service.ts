@@ -177,6 +177,8 @@ export class StreaksService {
     const futureDays: Day[] = [...days];
 
     for (let i = 1; i <= totalItemsToAdd; i++) {
+      // const futureDate = new Date(today);
+      // futureDate.setDate(futureDate.getDate() + i);
       const activity = {
         date: new Date(new Date().setDate(today.getDate() + i))
           .toISOString()
