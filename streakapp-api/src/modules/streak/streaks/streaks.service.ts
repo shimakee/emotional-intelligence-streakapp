@@ -98,7 +98,7 @@ export class StreaksService {
   // COMPLETED -> counts as streak
   // SAVED -> vague, but seems to not count as streak
   // AT_RISK -> does not, since it's mentioned as inactivity
-  private EvaluateStreakState(days: Day[]): Day[] {
+  public EvaluateStreakState(days: Day[]): Day[] {
     // assumption is that we get this in order form DB ascending from current to past
     // first element = today.
 
